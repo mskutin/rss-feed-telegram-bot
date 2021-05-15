@@ -16,7 +16,7 @@ if os.path.exists("config.env"):
 try:
     api_id = int(os.environ.get("API_ID"))   # Get it from my.telegram.org
     api_hash = os.environ.get("API_HASH")   # Get it from my.telegram.org
-    feed_urls = list(set(i for i in os.environ.get("FEED_URLS").split("|")))  # RSS Feed URL of the site.
+    feed_urls = list(set(i for i in os.environ.get("FEED_URL").split("|")))  # RSS Feed URL of the site.
     bot_token = os.environ.get("BOT_TOKEN")   # Get it by creating a bot on https://t.me/botfather
     log_channel = int(os.environ.get("LOG_CHANNEL"))   # Telegram Channel ID where the bot is added and have write permission. You can use group ID too.
     check_interval = int(os.environ.get("INTERVAL", 10))   # Check Interval in seconds.  
@@ -41,7 +41,7 @@ def create_feed_checker(feed_url):
         entry = FEED.entries[0]
         if entry.id != db.get_link(feed_url).link:
                        # ↓ Edit this message as your needs.
-            message = f"**{entry.title}**\n```{entry.link}```"
+            message = "/mirh7 "f"{entry.link}"
             try:
                 app.send_message(log_channel, message)
                 db.update_link(feed_url, entry.id)

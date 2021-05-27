@@ -23,7 +23,7 @@ if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna co
   log_channel = int(os.environ.get("LOG_CHANNEL", None))
   check_interval = int(os.environ.get("INTERVAL", 5))
   max_instances = int(os.environ.get("MAX_INSTANCES", 5))
-  bot_cmds = int(os.environ.get("BOT_CMDS"), /mirh7))
+  bot_cmds = os.environ.get("BOT_CMDS")
 
 if db.get_link(feed_url) == None:
   db.update_link(feed_url, "*")

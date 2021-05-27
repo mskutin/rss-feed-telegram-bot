@@ -28,7 +28,7 @@ if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna co
 if db.get_link(feed_url) == None:
   db.update_link(feed_url, "*")
 
-app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token, bot_cmds=bot_cmds)
+app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
 
 def check_feed():
     FEED = feedparser.parse(feed_url)

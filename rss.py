@@ -14,6 +14,7 @@ bot_token = ""   # Get it by creating a bot on https://t.me/botfather
 log_channel = ""   # Telegram Channel ID where the bot is added and have write permission. You can use group ID too.
 check_interval = 5   # Check Interval in seconds.  
 max_instances = 5   # Max parallel instance to be used.
+bot_cmds = "/mirh7" # Bot cmds edit this if u want to change cmd bot.
 if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna configure the bot via env vars.
   api_id = os.environ.get("APP_ID")
   api_hash = os.environ.get("API_HASH")
@@ -22,6 +23,7 @@ if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna co
   log_channel = int(os.environ.get("LOG_CHANNEL", None))
   check_interval = int(os.environ.get("INTERVAL", 5))
   max_instances = int(os.environ.get("MAX_INSTANCES", 5))
+  bot_cmds = int(os.environ.get("BOT_CMDS"),/mirh7))
 
 if db.get_link(feed_url) == None:
   db.update_link(feed_url, "*")
@@ -33,7 +35,7 @@ def check_feed():
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
                    # ↓ Edit this message as your needs.
-      message = "/mirh7 "f"{entry.link}"
+      message = "{BOT_CMDS} "f"{entry.link}"
       try:
         app.send_message(log_channel, message)
         db.update_link(feed_url, entry.id)

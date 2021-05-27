@@ -39,7 +39,7 @@ def check_feed():
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
                    # ↓ Edit this message as your needs.
-      message = "f"{bot_cmds} "f"{entry.link}"
+      message = f"{bot_cmds}<code>{entry.link}</code>"
       try:
         app.send_message(log_channel, message)
         db.update_link(feed_url, entry.id)

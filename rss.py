@@ -14,7 +14,7 @@ bot_token = ""   # Get it by creating a bot on https://t.me/botfather
 log_channel = ""   # Telegram Channel ID where the bot is added and have write permission. You can use group ID too.
 check_interval = 5   # Check Interval in seconds.  
 max_instances = 5   # Max parallel instance to be used.
-bot_cmds = "/mirh7" # Bot cmds edit this if u want to change cmd bot.
+bot_cmds = "" # Bot cmds edit this if u want to change cmd bot.
 if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna configure the bot via env vars.
   api_id = os.environ.get("APP_ID")
   api_hash = os.environ.get("API_HASH")
@@ -28,7 +28,7 @@ if os.environ.get("ENV"):   # Add a ENV in Environment Variables if you wanna co
 if db.get_link(feed_url) == None:
   db.update_link(feed_url, "*")
 
-app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token)
+app = Client(":memory:", api_id=api_id, api_hash=api_hash, bot_token=bot_token, bot_cmds=bot_cmds)
 
 def check_feed():
     FEED = feedparser.parse(feed_url)
@@ -37,7 +37,7 @@ def check_feed():
                    # ↓ Edit this message as your needs.
       message = "{bot_cmds} "f"{entry.link}"
       try:
-        app.send_message(log_channel, message)
+        app.send_message(bot_cmds, log_channel, message)
         db.update_link(feed_url, entry.id)
       except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")

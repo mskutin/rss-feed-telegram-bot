@@ -37,7 +37,7 @@ def check_feed():
                    # ↓ Edit this message as your needs.
       message = "{bot_cmds} "f"{entry.link}"
       try:
-        app.send_message(bot_cmds, log_channel, message)
+        app.send_message(log_channel, message)
         db.update_link(feed_url, entry.id)
       except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")

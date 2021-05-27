@@ -1,10 +1,14 @@
 import os
 import feedparser
+from dotenv import load_dotenv
 from sql import db
 from time import sleep, time
 from pyrogram import Client, filters
 from pyrogram.errors import FloodWait
 from apscheduler.schedulers.background import BackgroundScheduler
+
+if os.path.exists("config.env"):
+    load_dotenv("config.env")
 
 
 api_id = ""   # Get it from my.telegram.org
@@ -35,7 +39,7 @@ def check_feed():
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
                    # ↓ Edit this message as your needs.
-      message = "{bot_cmds} "f"{entry.link}"
+      message = "f"{bot_cmds} "f"{entry.link}"
       try:
         app.send_message(log_channel, message)
         db.update_link(feed_url, entry.id)

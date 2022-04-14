@@ -38,7 +38,7 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-            message = f"**{entry.title}**\n```{entry.link}```"
+      message = f"**{entry.title}**\n```{entry.link}```"
       try:
         app.send_message(log_channel, message)
         db.update_link(feed_url, entry.id)

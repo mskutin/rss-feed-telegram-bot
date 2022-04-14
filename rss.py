@@ -38,9 +38,9 @@ def check_feed():
     FEED = feedparser.parse(feed_url)
     entry = FEED.entries[0]
     if entry.id != db.get_link(feed_url).link:
-      message = f"**{entry.title}**\n```{entry.link}```"
+      message = f"**{entry.title}**\n {entry.link}"
       try:
-        app.send_message(log_channel, message)
+        app.send_message(log_channel, message, disable_web_page_preview=True)
         db.update_link(feed_url, entry.id)
       except FloodWait as e:
         print(f"FloodWait: {e.x} seconds")
